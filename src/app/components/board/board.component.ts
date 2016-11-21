@@ -7,7 +7,6 @@ export type InternalStateType = {
 };
 
 @Component({
-  moduleId: module.id,
   selector: 'board-component',
   templateUrl: './board.component.html'
 })
