@@ -1,0 +1,11 @@
+<div class="chip-outer-wrap">
+    <span
+        [ngClass]="{ 'chip-inner-wrap': true, 'active': localState.active }"
+        class="chip-{{value}}"
+        on-mousedown="handleChipMouseDown()"
+        on-mouseup="handleChipMouseUp()"
+        on-mouseleave="handleChipMouseUp()"
+        (click)="handleChipClick(value)">
+        {{value}}
+    </span>
+</div>

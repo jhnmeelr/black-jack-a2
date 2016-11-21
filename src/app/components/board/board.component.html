@@ -1,0 +1,71 @@
+<div class="board-wrap">
+    <a class="pause" routerLink='/menu'></a>
+    <div class="cash">{{state.cash}}</div>
+
+    <div *ngIf="state.gameCycle.deal">
+        <dealer-hand-component [state]="state"></dealer-hand-component>
+        <player-hand-component [state]="state"></player-hand-component>
+    </div>
+
+    <div *ngIf="state.gameCycle.placeYourBet && !state.gameCycle.giveMoreCash" class="place-your-bet">Place Your Bet</div>
+
+    <div *ngIf="state.gameCycle.giveMoreCash" class="give-more-cash">
+        <div class="message">
+            Take Your Extra<br/>100
+        </div>
+        <div class="button" (click)="getMoreCash()">Ok</div>
+    </div>
+
+    <div class="bet">{{state.bet}}</div>
+
+    <div [ngClass]="{ 'chips': true, 'on-deal': state.gameCycle.deal }">
+        <chip-component
+            [value]="5"
+            [state]="state"
+            (chipClicked)="addChip($event)"
+            *ngIf="state.cash >= 5"></chip-component>
+        <chip-component
+            [value]="10"
+            [state]="state"
+            (chipClicked)="addChip($event)"
+            *ngIf="state.cash >= 10"></chip-component>
+        <chip-component
+            [value]="25"
+            [state]="state"
+            (chipClicked)="addChip($event)"
+            *ngIf="state.cash >= 25"></chip-component>
+        <chip-component
+            [value]="50"
+            [state]="state"
+            (chipClicked)="addChip($event)"
+            *ngIf="state.cash >= 50"></chip-component>
+        <chip-component
+            [value]="100"
+            [state]="state"
+            (chipClicked)="addChip($event)"
+            *ngIf="state.cash >= 100"></chip-component>
+    </div>
+
+    <div *ngIf="state.cash < 5" class="no-chips">No More Chips</div>
+
+    <div class="buttons">
+        <div *ngIf="state.gameCycle.placeYourBet">
+            <button (click)="clearBet()">Clear</button>
+            <button (click)="placeLastBet()">Last Bet</button>
+            <button (click)="deal()">Deal</button>
+        </div>
+        <div *ngIf="state.gameCycle.deal && !state.gameCycle.newBet">
+            <button *ngIf="!state.gameCycle.hit" (click)="this.doubleBet()">Double</button>
+            <button (click)="stay()">Stay</button>
+            <button (click)="hit()">Hit</button>
+        </div>
+        <button *ngIf="state.gameCycle.newBet" (click)="newBet()">New Bet</button>
+    </div>
+
+    <div *ngIf="state.gameCycle.newBet">
+        <div *ngIf="state.result === 'Lose' || state.result === 'Dealer has a BlackJack'" class="info">Lose</div>
+        <div *ngIf="state.result === 'Win' || state.result === 'Player has a BlackJack'" class="info">Win</div>
+        <div *ngIf="state.result === 'Push'" class="info">Push</div>
+    </div>
+
+</div>

@@ -1,0 +1,9 @@
+<div class="hand player-hand">
+    <div class="cards">
+        <div *ngFor="let card of state.player.cards" class="card">
+            <div class="rank">{{card.rank}}</div>
+            <div [innerHTML]="getSuit(card)"></div>
+        </div>
+    </div>
+    <div class="score">{{state.player.score}}</div>
+</div>

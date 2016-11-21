@@ -1,0 +1,10 @@
+<div class="hand dealer-hand">
+    <div class="cards">
+        <div *ngFor="let card of state.dealer.cards" class="card">
+            <div class="rank">{{card.rank}}</div>
+            <div [innerHTML]="getSuit(card)"></div>
+        </div>
+        <div *ngIf="state.dealer.cards.length === 1" class="card body"></div>
+    </div>
+    <div class="score">{{state.dealer.score}}</div>
+</div>

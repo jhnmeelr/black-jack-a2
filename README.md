@@ -1,0 +1,1 @@
+A simple blackjack game built with Angular 2
